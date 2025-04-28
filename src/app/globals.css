@@ -1,26 +1,306 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Updated color values from the second CSS */
+  --primary: 230 83% 60%;
+  --primary-foreground: 0 0% 98%;
+  --accent: 262 59.6% 57.6%;
+  --accent-foreground: 240 5.9% 10%;
+
+  /* System colors */
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 230 83% 60%;
+  --radius: 0.6rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  /* Updated dark mode color values from the second CSS */
+  --primary: 230 83% 60%;
+  --primary-foreground: 210 40% 98%;
+  --accent: 262 59.6% 57.6%;
+  --accent-foreground: 210 40% 98%;
+
+  --background: 223 42% 5%;
+  --foreground: 210 40% 98%;
+  --muted: 223 25% 10%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --popover: 223 42% 5%;
+  --popover-foreground: 210 40% 98%;
+  --card: 223 42% 8%;
+  --card-foreground: 210 40% 98%;
+  --border: 223 25% 15%;
+  --input: 223 25% 15%;
+  --secondary: 223 25% 10%;
+  --secondary-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 230 83% 60%;
+  --radius: 0.6rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/50 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Common animations */
+@layer utilities {
+  .animate-fade-up {
+    @apply animate-[fade-up_0.5s_ease-out_forwards];
+  }
+ 
+  .animate-fade-down {
+    @apply animate-[fade-down_0.5s_ease-out_forwards];
+  }
+
+  .animate-fade-in {
+    @apply animate-[fade-in_0.5s_ease-out_forwards];
+  }
+
+  .animate-scale-in {
+    @apply animate-[scale-in_0.3s_ease-out_forwards];
+  }
+
+  .animate-float {
+    @apply animate-[float_6s_ease-in-out_infinite];
+  }
+
+  .animate-pulse-soft {
+    @apply animate-[pulse-soft_3s_ease-in-out_infinite];
+  }
+
+  .animate-border-glow {
+    @apply animate-[border-glow_2s_ease-in-out_infinite];
+  }
+
+  .animate-bounce-subtle {
+    @apply animate-[bounce-subtle_2s_ease-in-out_infinite];
+  }
+
+  .animate-rotate-slow {
+    @apply animate-[rotate-slow_20s_linear_infinite];
+  }
+
+  .bg-gradient-blur {
+    @apply bg-gradient-to-br from-primary/30 via-primary-light/20 to-transparent blur-3xl;
+  }
+
+  .bg-glass {
+    @apply bg-white/70 backdrop-blur-md dark:bg-slate-900/70;
+  }
+
+  .ring-gradient {
+    @apply ring-2 ring-primary/20 dark:ring-primary/30;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  .shadow-glow {
+    @apply shadow-[0_0_30px_rgba(0, 0, 0, 0.1)] dark:shadow-[0_0_30px_rgba(0, 0, 0, 0.3)];
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Intro Animation */
+.intro-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  z-index: 9999;
+}
+
+.intro-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes pulse-soft {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+}
+
+@keyframes border-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px 2px hsla(var(--primary), 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 15px 5px hsla(var(--primary), 0.4);
+  }
+}
+
+@keyframes bounce-subtle {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Smooth transitions for theme switching */
+html {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Custom styling matching the design */
+.primary-gradient {
+  @apply bg-gradient-to-r from-primary to-accent text-white;
+}
+
+.section-padding {
+  @apply py-16 md:py-20 lg:py-24;
+}
+
+/* Custom border styles matching the design */
+.border-primary-light {
+  @apply border border-primary/20;
+}
+
+/* Gallery masonry layout */
+.masonry-grid {
+  @apply columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-4;
+}
+
+.masonry-item {
+  @apply mb-4 break-inside-avoid;
 }
