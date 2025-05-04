@@ -6,12 +6,20 @@ import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { useAppointment } from "@/components/schedule-a-demo";
 import { useTheme } from "@/hooks/use-theme";
 import { ContainerTextFlip } from "../ui/container-text-flip";
+import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
+import { FlipWords } from "../ui/flip-words";
 
 export function HeroSection() {
   const { ref, isIntersecting } = useIntersectionObserver({ triggerOnce: true });
   const { openMultiStepForm } = useAppointment();
   const { resolvedTheme } = useTheme();
-  const words = ["VEHICLE", "EQUIPMENT", "CASHFLOW "];
+  const mainWord = ["VEHICLE", "EQUIPMENT", "CASHFLOW "];
+  const words = [
+    {
+      text: "48 hours",
+      className: "text-bg-primary ",
+    }
+  ];
 
   const handleNavClick = (id: string) => {
     scrollToElement(id);
@@ -76,12 +84,14 @@ export function HeroSection() {
   };
 
   return (
-    // <section
-    //   id="home"
-    //   className="relative overflow-hidden bg-gradient-to-br from-white via-sky-50 to-slate-50 pt-16 dark:from-slate-900 dark:via-slate-800/70 dark:to-slate-800/50 lg:pt-20"
-
-    // >
-    <section ref={ref as React.RefObject<HTMLElement>} id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden mb-8">
+    <section
+      id="home"
+      ref={ref as React.RefObject<HTMLElement>}
+      className="relative overflow-hidden min-h-screen pt-16 lg:pt-20"
+      style={{
+        backgroundImage: "linear-gradient(120deg, #478eff 0%, #c2fbf0 100%)"
+      }} >
+      {/* <section ref={ref as React.RefObject<HTMLElement>} id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden mb-8"> */}
       {/* Dark grid background */}
       <div className="absolute inset-0 bg-grid-white" />
 
@@ -120,7 +130,7 @@ export function HeroSection() {
 
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMxNjM4NTUiIGZpbGwtb3BhY2l0eT0iMC4wNCI+PHBhdGggZD0iTTM2IDM0djZoNnYtNmgtNnptNiA2djZoLTZ2LTZoNnptLTYtNnYtNmg2djZoLTZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-80 dark:opacity-30"></div>
 
-      <div className="container relative mx-auto px-4 lg:px-8">
+      <div className="container relative  ml-4 px-4 lg:px-8">
         <motion.div
           className="grid grid-cols-1 gap-12 pb-16 pt-12 lg:grid-cols-2 lg:gap-16 lg:pb-28 lg:pt-16"
           variants={containerVariants}
@@ -143,11 +153,18 @@ export function HeroSection() {
               className="mb-6 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-4xl font-bold leading-tight tracking-tight text-transparent dark:from-white dark:to-slate-200 lg:text-3xl xl:text-3xl"
               variants={itemVariants}
             >
-              FAST, FLEXIBLE FINANCE TO GET <span className="text-primary">Your
-                <br />
-                <ContainerTextFlip words={words} className="text-blue-gradient" animationDuration={4000} />
-              </span> in <span className="text-primary">48 Hours</span>
+              <span className="highlight-text text-black">FAST, FLEXIBLE FINANCE</span> <span>TO GET</span>
+              <br />
+              <div className="flex items-center gap-2">
+                <span className="text-primary mt-2">Your</span>
+                <FlipWords words={mainWord} className="mt-2" />
+              </div>
+              <div className="flex items-center gap-2">
+                IN JUST
+                  <span className="highlight-text text-black">  48 hours</span>
+              </div>
             </motion.h4>
+
 
             <motion.p
               className="mb-8 text-lg leading-relaxed text-slate-600 dark:text-slate-300"

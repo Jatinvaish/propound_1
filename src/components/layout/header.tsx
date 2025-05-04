@@ -95,13 +95,13 @@ export function Header() {
         </nav>
         
         <div className="flex items-center space-x-4">
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 0.4 }}
           >
             <ThemeToggle />
-          </motion.div>
+          </motion.div> */}
           
           <motion.div 
             className="hidden items-center gap-4 sm:flex"
